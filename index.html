@@ -6,6 +6,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css" integrity="sha512-MqL4+Io386IOPMKKyplKII0pVW5e+kb+PI/I3N87G3fHIfrgNNsRpzIXEi+0MQC0sR9xZNqZqCYVcC61fL5+Vg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 
 </head>
 <body>
@@ -64,37 +65,38 @@
             <button><i class="ri-search-line"></i></button>
             <input type="text" name="" id="" placeholder="Search for Videos...">
         </div>
-        <i class="ri-equalizer-2-line"></i>
+        <div class="header-actions">
+            <button class="theme-toggle" id="themeToggle">
+                <i class="ri-sun-line light-icon"></i>
+                <i class="ri-moon-line dark-icon"></i>
+            </button>
+            <i class="ri-equalizer-2-line"></i>
+        </div>
+    </div>
 
-    </div>
-    <div class="banner">
-        <div class="share">
-            <i class="ri-share-forward-line"></i>
-            <i class="ri-more-fill"></i>
-        </div>
-        <div class="video-info">
-            <div class="item">
-                <h3>Today's Popular Vidoes: </h3>
-            </div>
-            <div class="item">
-                <i class="ri-thumb-up-line"></i>
-                <h3>230</h3>
-            </div>
-            <div class="item">
-                <i class="ri-eye-line"></i>
-                <h3>2330</h3>
-            </div>
-            <div class="item">
-                <i class="ri-calendar-line"></i>
-                <h3>20 April</h3>
-            </div>
-            <div class="item">
-                <i class="ri-bookmark-line"></i>
-                <h3>454</h3>
+    <!-- New Hero Section -->
+    <div class="hero-section">
+        <div class="hero-video">
+            <div class="video-container">
+                <video src="video/golmal.mp4" muted loop autoplay></video>
+                <div class="video-overlay">
+                    <div class="video-info">
+                        <h2>Golmaal: Fun Unlimited</h2>
+                        <p>Watch the hilarious adventures of Gopal and his friends in this comedy classic</p>
+                        <div class="video-stats">
+                            <span><i class="ri-eye-line"></i> 2.5M views</span>
+                            <span><i class="ri-thumb-up-line"></i> 150K</span>
+                            <span><i class="ri-calendar-line"></i> Released: 2006</span>
+                        </div>
+                        <button class="play-btn">
+                            <i class="ri-play-fill"></i> Watch Now
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
-        <video src="video/golmal.mp4" muted loop ></video>
     </div>
+
     <div class="separator">
         <h3>Discover World</h3>
         <div class="categories">
@@ -114,7 +116,10 @@
             <div class="like">
                 <i class="ri-heart-3-fill"></i>
             </div>
-            <video src="video/avenger.mp4" muted loop></video>
+            <div class="thumbnail">
+                <img src="img/avengerl.jpg" alt="Animal on Winters">
+                <video src="video/avenger.mp4" muted loop></video>
+            </div>
             <div class="details">
                 <h3>Animal on Winters</h3>
                 <div class="info">
@@ -126,7 +131,6 @@
                         <i class="ri-star-fill"></i>
                         <h5>3.5</h5>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -134,9 +138,12 @@
             <div class="like">
                 <i class="ri-heart-3-fill"></i>
             </div>
-            <video src="video/bademiya.mp4" muted loop></video>
+            <div class="thumbnail">
+                <img src="img/badel.jpg" alt="Bade Miya">
+                <video src="video/bademiya.mp4" muted loop></video>
+            </div>
             <div class="details">
-                <h3>Bade Miya</h3>
+                <h3>Bade Miyan Chote Miyan</h3>
                 <div class="info">
                     <div class="location">
                         <i class="ri-map-pin-line"></i>
@@ -146,7 +153,6 @@
                         <i class="ri-star-fill"></i>
                         <h5>3.5</h5>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -154,7 +160,10 @@
             <div class="like">
                 <i class="ri-heart-3-fill"></i>
             </div>
-            <video src="video/batman.mp4" muted loop></video>
+            <div class="thumbnail">
+                <img src="img/batmanl.jpg" alt="Batman Vs Superman">
+                <video src="video/batman.mp4" muted loop></video>
+            </div>
             <div class="details">
                 <h3>Batman Vs Superman</h3>
                 <div class="info">
@@ -166,7 +175,72 @@
                         <i class="ri-star-fill"></i>
                         <h5>3.5</h5>
                     </div>
-
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div class="like">
+                <i class="ri-heart-3-fill"></i>
+            </div>
+            <div class="thumbnail">
+                <img src="img/golmall.jpg" alt="Golmaal 3">
+                <video src="video/sholay.mp4" muted loop></video>
+            </div>
+            <div class="details">
+                <h3>Sholay</h3>
+                <div class="info">
+                    <div class="location">
+                        <i class="ri-map-pin-line"></i>
+                        <h5>India</h5>
+                    </div>
+                    <div class="rate">
+                        <i class="ri-star-fill"></i>
+                        <h5>4.8</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div class="like">
+                <i class="ri-heart-3-fill"></i>
+            </div>
+            <div class="thumbnail">
+                <img src="img/salarl.jpg" alt="Salar">
+                <video src="video/motherindia.mp4" muted loop></video>
+            </div>
+            <div class="details">
+                <h3>Mother India</h3>
+                <div class="info">
+                    <div class="location">
+                        <i class="ri-map-pin-line"></i>
+                        <h5>India</h5>
+                    </div>
+                    <div class="rate">
+                        <i class="ri-star-fill"></i>
+                        <h5>4.7</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div class="like">
+                <i class="ri-heart-3-fill"></i>
+            </div>
+            <div class="thumbnail">
+                <img src="img/avngerp.jpg" alt="Avenger">
+                <video src="video/mughal.mp4" muted loop></video>
+            </div>
+            <div class="details">
+                <h3>Mughal-e-Azam</h3>
+                <div class="info">
+                    <div class="location">
+                        <i class="ri-map-pin-line"></i>
+                        <h5>India</h5>
+                    </div>
+                    <div class="rate">
+                        <i class="ri-star-fill"></i>
+                        <h5>4.9</h5>
+                    </div>
                 </div>
             </div>
         </div>

@@ -19,6 +19,9 @@ body{
     display: flex;
     padding: 20px;
     height: 100vh;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 .left-section{
     height:100%;
@@ -29,6 +32,9 @@ body{
     position: fixed;
     top:0;
     transition: all 0.3s ease;
+    animation: slideIn 0.5s ease-out;
+    background-color: var(--bg-primary);
+    border-right: 2px solid var(--border-color);
 }
 .left-section .logo{
 display: flex;
@@ -53,6 +59,7 @@ display: flex;
 align-items: center;
 gap: 10px;
 cursor: pointer;
+transition: transform 0.3s ease;
 }
 .left-section .sidebar .item i,
 .left-section  .sign-out i{
@@ -80,26 +87,33 @@ transition: all 0.4s ease;
     flex: 5;
     margin-left: 180px;
     transition: all 0.3s ease;
-
+    animation: fadeIn 0.5s ease-out;
 }
 .main .header{
     display: flex;
     align-items: center;
     justify-content: space-around;
-    border-right: 2px solid #e5e5e5;
+    border-right: 2px solid var(--border-color);
+    background-color: var(--header-bg);
 }
 .main .header .search{
 width:85%;
 display: flex;
 align-items: center;
-background-color: #e8f3f8;
+background-color: var(--search-bg);
 border-radius: 12px;
+transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .main .header .search input{
     border:none;
     padding:10px 0;
     width: 100%;
     background:transparent;
+    transition: transform 0.3s ease;
+    color: var(--text-primary);
+}
+.main .header .search input::placeholder {
+    color: var(--text-secondary);
 }
 .main .header .search button{
     border:none;
@@ -115,63 +129,7 @@ border-radius: 12px;
     border-radius: 50%;
     cursor: pointer;
 }
-.main .banner{
-    width: 90%;
-    height: 320px;
-    display: flex;
-    position: relative;
-    margin-top: 30px;
-}
-.main .banner video{
-    width: 100%;
-    height: 100%;
-    border-radius: 18px;
-    cursor:pointer;
-    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.3);
-    transition: box-shadow 0.3s ease;
-}
-.main .banner video:hover{
-    box-shadow: none;
-}
-.main .banner .share{
-    position: absolute;
-    right: 16px;
-    top: 20px;
-}
-.main .banner .share i{
-    font-size: 20px;
-    color:#fff;
-    padding: 8px;
-    background-color: rgba(0,0,0,.4);
-    border-radius: 12px;
-    
-}
-.main .banner .video-info{
-    position:absolute;
-    color: #fff;
-    bottom: 0px;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 30px;
-    padding:14px;
-    background: rgba(0, 0, 0, 0.5);
-    border-radius:18px;
 
-}
-.main .banner .video-info .item{
-    display: flex;
-    align-items: center;
-    gap: 4px;
-}
-.main .banner .video-info .item i{
-font-size: 20px;
-}
-.main .banner .video-info .item h3{
-    font-size: 14px;
-    font-weight: 400;
-    }
 .main .separator{
     padding: 26px 20px;
 }
@@ -182,26 +140,31 @@ font-size: 20px;
 }
 .main .separator .categories a{
     padding: 8px 12px;
-    background-color: #e8f3f8;
+    background-color: var(--search-bg);
     font-size: 14px;
     border-radius: 14px;
     transition: all 0.3s ease;
+    color: var(--text-primary);
 }
 .main .separator .categories a.active,
 .main .separator .categories a:hover{
-    background-color: #15333a;
-    color:#fff;
+    background-color: var(--accent-color);
+    color: var(--text-primary);
 }
-.main .vidoe-items{
-    display: flex;
-    justify-content: space-between;
+.main .vidoe-items {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
     padding: 10px 20px 20px;
 }
 
-.main .vidoe-items .item{
+.main .vidoe-items .item {
     position: relative;
-    width:31%;
+    width: 100%;
+    background-color: var(--card-bg);
+    box-shadow: 0 2px 10px var(--card-shadow);
 }
+
 .main .vidoe-items .item .like{
     position: absolute;
     right: 20px;
@@ -220,17 +183,51 @@ font-size: 20px;
 .right-section .weekly .item> i:hover{
 color: #f86161;
 }
-.main .vidoe-items .item video{
+.main .vidoe-items .item .thumbnail {
+    position: relative;
     width: 100%;
     aspect-ratio: 3/4;
     border-radius: 30px;
+    overflow: hidden;
     cursor: pointer;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    transition: box-shadow 0.3s ease;
 }
-.main .vidoe-items .item video:hover{
-    box-shadow: none;
+
+.main .vidoe-items .item .thumbnail img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+    display: block;
 }
+
+.main .vidoe-items .item .thumbnail video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.main .vidoe-items .item .thumbnail:hover img {
+    transform: scale(1.05);
+}
+
+.main .vidoe-items .item .thumbnail:hover video {
+    opacity: 1;
+}
+
+/* Remove the old video styles since we're using the thumbnail container */
+.main .vidoe-items .item video {
+    display: none;
+}
+
 .main .vidoe-items .item .details{
     margin-top: 10px;
 }
@@ -238,6 +235,7 @@ color: #f86161;
 display: flex;
 margin-top: 8px;
 gap: 20px;
+color: var(--text-secondary);
 }
 .main .vidoe-items .item .details .info .location,
 .main .vidoe-items .item .details .info .rate{
@@ -255,6 +253,8 @@ gap: 20px;
 }
 .right-section{
     flex:2;
+    animation: fadeIn 0.5s ease-out 0.2s backwards;
+    background-color: var(--bg-secondary);
 }
 .right-section .profile{
     display: flex;
@@ -273,6 +273,7 @@ gap: 20px;
 .right-section .profile .info h5{
     font-size: 13px;
     font-weight: 500;
+    color: var(--text-primary);
 }
 .right-section .profile .user{
     display: flex;
@@ -297,7 +298,7 @@ gap: 20px;
 .right-section > h3{
     margin-top: 30px;
     font-weight: 500;
-
+    color: var(--text-primary);
 }
 .right-section .playlist{
     margin-top: 20px;
@@ -310,6 +311,8 @@ gap: 20px;
     cursor: pointer;
     box-shadow: 0 10px 10px rgba(0, 0, 0, 0.3);
     transition: box-shadow 0.3s ease;
+    opacity: 0;
+    animation: fadeIn 0.5s ease-out forwards;
 }
 .right-section .playlist > video:hover{
     box-shadow: none;
@@ -337,11 +340,11 @@ gap: 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #15333a;
+    background-color: var(--card-bg);
     margin-top: 16px;
     padding: 10px 14px;
     border-radius: 20px;
-    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 10px 10px var(--card-shadow);
 }
 .right-section .player >i{
     background: #fed24d;
@@ -362,7 +365,7 @@ gap: 20px;
     box-shadow: 0 10px 10px rgba(0, 0, 0, 0.3);
 }
 .right-section .player .content .info> h5{
-    color: #fff;
+    color: var(--text-primary);
     font-weight: 500;
 
 }
@@ -383,7 +386,7 @@ gap: 20px;
     margin: 0 20px 0 10px;
 }
 .right-section .player .content .desc p{
-    color:#e5e5e5;
+    color: var(--text-secondary);
     font-size: 13px;
     line-height: 1.1rem;
     border-left: 1px solid #e5e5e5;
@@ -403,10 +406,14 @@ gap: 20px;
     padding: 10px;
     border-radius: 20px;
     cursor: pointer;
-    transition: box-shadow 0.3s ease;
+    transition: transform 0.3s ease;
+    opacity: 0;
+    animation: fadeIn 0.5s ease-out forwards;
+    background-color: var(--card-bg);
 }
 .right-section .weekly .item:hover{
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transform: translateX(5px);
 }
 .right-section .weekly .item > i{
     font-size: 24px;
@@ -428,5 +435,358 @@ gap: 20px;
 .right-section .weekly  .item .content .info .view h5,
 .right-section .weekly  .item .content .info .view i{
     font-weight: 500;
-    color:#555;
+    color: var(--text-secondary);
+}
+
+/* Key Animations */
+@keyframes slideIn {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(0); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* Hover Effects */
+.left-section .sidebar .item:hover {
+    transform: translateX(5px);
+}
+
+.main .vidoe-items .item:hover {
+    transform: translateY(-5px);
+}
+
+.main .banner .share i:hover {
+    transform: rotate(360deg);
+}
+
+.right-section .weekly .item:hover {
+    transform: translateX(5px);
+}
+
+/* Interactive Elements */
+.main .header .search:focus-within {
+    transform: scale(1.02);
+    box-shadow: 0 0 0 2px #fed24d;
+}
+
+.main .header .search input:focus {
+    transform: translateX(5px);
+}
+
+/* Video Loading Animation */
+.main .vidoe-items .item video,
+.right-section .playlist > video {
+    opacity: 0;
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* Active Item Animation */
+.left-section .sidebar .item.active {
+    animation: pulse 2s infinite;
+}
+
+/* Responsive adjustments for video grid */
+@media screen and (max-width: 1200px) {
+    .main .vidoe-items {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .main .vidoe-items {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Hero Section Styles */
+.hero-section {
+    width: 100%;
+    margin: 20px 0;
+    padding: 0 20px;
+}
+
+.hero-video {
+    width: 100%;
+    height: 500px;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.hero-video .video-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.hero-video video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero-video .video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.1) 100%);
+    display: flex;
+    align-items: center;
+    padding: 40px;
+}
+
+.hero-video .video-info {
+    color: #fff;
+    max-width: 600px;
+}
+
+.hero-video .video-info h2 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.hero-video .video-info p {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    opacity: 0.9;
+}
+
+.hero-video .video-stats {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.hero-video .video-stats span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.hero-video .play-btn {
+    background: #fed24d;
+    color: #000;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.hero-video .play-btn:hover {
+    transform: scale(1.05);
+    background: #ffb700;
+}
+
+.hero-video .play-btn i {
+    font-size: 1.3rem;
+}
+
+/* Responsive styles for hero section */
+@media screen and (max-width: 768px) {
+    .hero-video {
+        height: 400px;
+    }
+
+    .hero-video .video-info h2 {
+        font-size: 2rem;
+    }
+
+    .hero-video .video-info p {
+        font-size: 1rem;
+    }
+
+    .hero-video .video-stats {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .hero-video {
+        height: 300px;
+    }
+
+    .hero-video .video-info h2 {
+        font-size: 1.5rem;
+    }
+
+    .hero-video .video-overlay {
+        padding: 20px;
+    }
+}
+
+/* Theme Variables */
+:root {
+    /* Light Theme (Default) */
+    --bg-primary: #ffffff;
+    --bg-secondary: #f5f5f5;
+    --text-primary: #000000;
+    --text-secondary: #666666;
+    --accent-color: #fed24d;
+    --accent-hover: #ffb700;
+    --card-bg: #ffffff;
+    --card-shadow: rgba(0, 0, 0, 0.1);
+    --header-bg: #ffffff;
+    --search-bg: #e8f3f8;
+    --border-color: #e5e5e5;
+}
+
+[data-theme="dark"] {
+    --bg-primary: #1a1a1a;
+    --bg-secondary: #2d2d2d;
+    --text-primary: #ffffff;
+    --text-secondary: #b3b3b3;
+    --accent-color: #fed24d;
+    --accent-hover: #ffb700;
+    --card-bg: #2d2d2d;
+    --card-shadow: rgba(0, 0, 0, 0.3);
+    --header-bg: #1a1a1a;
+    --search-bg: #2d2d2d;
+    --border-color: #404040;
+}
+
+/* Apply Theme Variables */
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+    background-color: var(--bg-secondary);
+}
+
+.theme-toggle i {
+    font-size: 20px;
+}
+
+/* Theme Icons */
+.light-icon {
+    display: none;
+}
+
+.dark-icon {
+    display: block;
+}
+
+[data-theme="dark"] .light-icon {
+    display: block;
+}
+
+[data-theme="dark"] .dark-icon {
+    display: none;
+}
+
+/* Update existing styles to use theme variables */
+.main .header {
+    background-color: var(--header-bg);
+    border-right: 2px solid var(--border-color);
+}
+
+.main .header .search {
+    background-color: var(--search-bg);
+}
+
+.main .header .search input {
+    color: var(--text-primary);
+    background-color: transparent;
+}
+
+.main .header .search input::placeholder {
+    color: var(--text-secondary);
+}
+
+.main .separator .categories a {
+    background-color: var(--search-bg);
+    color: var(--text-primary);
+}
+
+.main .separator .categories a.active,
+.main .separator .categories a:hover {
+    background-color: var(--accent-color);
+    color: var(--text-primary);
+}
+
+.main .vidoe-items .item {
+    background-color: var(--card-bg);
+    box-shadow: 0 2px 10px var(--card-shadow);
+}
+
+.main .vidoe-items .item .details h3 {
+    color: var(--text-primary);
+}
+
+.main .vidoe-items .item .details .info {
+    color: var(--text-secondary);
+}
+
+.right-section {
+    background-color: var(--bg-secondary);
+}
+
+.right-section .profile .info h5 {
+    color: var(--text-primary);
+}
+
+.right-section > h3 {
+    color: var(--text-primary);
+}
+
+.right-section .player {
+    background-color: var(--card-bg);
+    box-shadow: 0 10px 10px var(--card-shadow);
+}
+
+.right-section .player .content .info h5 {
+    color: var(--text-primary);
+}
+
+.right-section .player .content .desc p {
+    color: var(--text-secondary);
+}
+
+.right-section .weekly .item {
+    background-color: var(--card-bg);
+}
+
+.right-section .weekly .item .content h4 {
+    color: var(--text-primary);
+}
+
+.right-section .weekly .item .content .view h5 {
+    color: var(--text-secondary);
 }
